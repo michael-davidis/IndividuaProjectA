@@ -21,23 +21,13 @@ public class Course {
     private String Type;
     private String start_date;
     private String end_date;
-    private Trainer trainer;
 
-    public Course(String title, String stream, String Type, Trainer trainer, String start_date, String end_date) {
+    public Course(String title, String stream, String Type, String start_date, String end_date) {
         this.title = title;
         this.stream = stream;
         this.Type = Type;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.trainer = trainer;
-    }
-
-    public Trainer getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
     }
 
     public String getTitle() {

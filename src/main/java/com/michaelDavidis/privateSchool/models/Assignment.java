@@ -15,38 +15,32 @@ import java.util.Scanner;
  */
 public class Assignment {
 
-    static Scanner sc = new Scanner(System.in);
-    public static ArrayList<Assignment> assignmentsList = new ArrayList<Assignment>();
     private String title;
     private String description;
-    private Date subDateTime;
+    private Course course;
+    private String subDateTime;
     private int oralMark;
     private int totalMark;
 
-    public Assignment(String title, String description, Date subDateTime, int oralMark, int totalMark) {
+    public Assignment(String title, String description, Course course, String subDateTime, int oralMark, int totalMark) {
         this.title = title;
         this.description = description;
+        this.course = course;
         this.subDateTime = subDateTime;
         this.oralMark = oralMark;
         this.totalMark = totalMark;
     }
 
-    public static void createAssignment() {
-
-        System.out.print("Give me the title of the assignment: ");
-        String title = sc.next();
-        System.out.print("Give me the description of the assignment: ");
-        String description = sc.next();
-        System.out.print("Give me its due date: ");
-        Date subDate = new Date(sc.next());
-        System.out.print("Give me the oral mark: ");
-        int oMark = sc.nextInt();
-        System.out.print("Give me the total mark: ");
-        int tMark = sc.nextInt();
-        Assignment assignment = new Assignment(title, description, subDate, oMark, tMark);
-        assignmentsList.add(assignment);
+    public Course getCourse() {
+        return course;
     }
 
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    
+    
     public String getTitle() {
         return title;
     }
@@ -61,14 +55,6 @@ public class Assignment {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getSubDateTime() {
-        return subDateTime;
-    }
-
-    public void setSubDateTime(Date subDateTime) {
-        this.subDateTime = subDateTime;
     }
 
     public int getOralMark() {
@@ -87,4 +73,11 @@ public class Assignment {
         this.totalMark = totalMark;
     }
 
+    public String getSubDateTime() {
+        return subDateTime;
+    }
+
+    public void setSubDateTime(String subDateTime) {
+        this.subDateTime = subDateTime;
+    }
 }

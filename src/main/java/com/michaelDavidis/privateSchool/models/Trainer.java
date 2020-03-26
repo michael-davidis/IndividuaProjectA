@@ -14,19 +14,24 @@ import java.util.Scanner;
  */
 public class Trainer {
 
-    static Scanner sc = new Scanner(System.in);
     private String firstName;
     private String lastName;
-    private String subject;
+    private Course course;
 
-    public Trainer(String firstName, String lastName, String subject) {
+    public Trainer(String firstName, String lastName, Course course) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.subject = subject;
+        this.course = course;
     }
-    
-    
-    
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -41,14 +46,6 @@ public class Trainer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
 }

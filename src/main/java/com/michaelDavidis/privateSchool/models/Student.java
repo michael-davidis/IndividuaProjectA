@@ -34,25 +34,6 @@ public class Student {
         this.assignment = assignment;
     }
 
-    public static void createStudent() {
-        String cont = "Y";
-        while (cont.equalsIgnoreCase("y")) {
-            System.out.print("Give me the first name of the student: ");
-            String fname = sc.next();
-            System.out.print("Give me the last name of the student: ");
-            String lname = sc.next();
-            System.out.print("Give me the date of his/her birth: ");
-            Date dob = new Date(sc.next());
-            System.out.print("Give me his/her tuition fees: ");
-            int fee = sc.nextInt();
-            System.out.println("Give me his/her course: ");
-
-//            Student student = new Student(fname, lname, dob, fee, course, assignment);
-//            studentsList.add(student);
-            System.out.println("Do you want to continue and add another student? (Y/N)");
-        }
-    }
-
     public String getFirstName() {
         return firstName;
     }
