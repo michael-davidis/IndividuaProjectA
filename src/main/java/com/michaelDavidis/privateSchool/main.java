@@ -144,7 +144,6 @@ public class main {
         ArrayList<Course> courses = new ArrayList<>();
 //      While loop for if we want to add another course
         while (cont.equalsIgnoreCase("y")) {
-            Scanner sc = new Scanner(System.in);
             System.out.print("Give me the first name of the student: ");
             String deathOfAScanner = Tools.scan.nextLine();
             String fname = Tools.scan.nextLine();
@@ -170,8 +169,11 @@ public class main {
                     System.out.println("using random, predifined data. In that case, press enter without typing");
                     System.out.println("anything in the first sentence.\n");
                     createCourse(coursesList);
+                } else {
+                    createCourse(coursesList);
                 }
                 Menu.showListObjects(coursesList);
+                System.out.println("\nChoose the course:");
                 int courseNum = Tools.scan.nextInt();
                 courses.add(Menu.chooseCourse(coursesList, courseNum));
                 System.out.println("Is this student attending another course? (Y/N)");
@@ -251,7 +253,7 @@ public class main {
                     System.out.println("This is not a valid choice.");
                     System.out.println("Choose the appropriate number.\n");
                 }
-            } else if(!outerChoice.equalsIgnoreCase("exit")){
+            } else if (!outerChoice.equalsIgnoreCase("exit")) {
                 System.out.println("\n");
                 System.out.println("This is not a valid choice.");
                 System.out.println("Choose the appropriate number.\n");

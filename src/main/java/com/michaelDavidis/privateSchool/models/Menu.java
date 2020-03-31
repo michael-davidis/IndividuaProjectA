@@ -35,7 +35,7 @@ public class Menu {
     }
 
     public static void createOrSee() {
-        System.out.println("Do you wish to create a new object\nor to see what you have?");
+        System.out.println("\nDo you wish to create a new object\nor to see what you have?");
         System.out.println("During this menu, you can type \"Exit\" and exit our app.");
         System.out.print("Press 1 to create or 2 to access the database: ");
     }
@@ -178,7 +178,7 @@ public class Menu {
             System.out.println("There are no students registered.\n");
         }
         coursesList.stream().map((course) -> {
-            System.out.println("The students of " + course + " are: ");
+            System.out.println("The students of " + course.getTitle() + " are: ");
             return course;
         }).forEachOrdered((course) -> {
             studentsList.forEach((student) -> {
