@@ -5,7 +5,12 @@
  */
 package main.java.com.michaelDavidis.privateSchool.models;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -22,8 +27,16 @@ public class Menu {
         System.out.println("*******************************************\n");
     }
 
+    public static void exiting() {
+        System.out.println("\n*******************************************");
+        System.out.println("*             Thank you for               *");
+        System.out.println("*             using our app!              *");
+        System.out.println("*******************************************");
+    }
+
     public static void createOrSee() {
-        System.out.println("Do you wish to create a new object\n or to see what you have?");
+        System.out.println("Do you wish to create a new object\nor to see what you have?");
+        System.out.println("During this menu, you can type \"Exit\" and exit our app.");
         System.out.print("Press 1 to create or 2 to access the database: ");
     }
 
@@ -57,6 +70,8 @@ public class Menu {
         System.out.println("Press 6 for a list of all the assignments per course.");
         System.out.println("Press 7 for a list of all trainers per course.");
         System.out.println("Press 8 for a list of all students with 2+ courses.");
+        System.out.println("Press 9 to see if there are any students that need to submit");
+        System.out.println("one or more assignments in the same week as the date that you want.");
     }
 
     public static void showListObjects(ArrayList list) {
@@ -65,7 +80,7 @@ public class Menu {
             if (list.get(0).getClass() == Trainer.class) {
                 for (Object tmp : list) {
                     Trainer trainer = (Trainer) tmp;
-                    System.out.println(i + ". " + trainer.getFirstName() + " " + trainer.getLastName());
+                    System.out.println(i + ". " + trainer.getFirstName() + " " + trainer.getLastName() + " is teaching " + trainer.getCourse().getTitle());
                     i++;
                 }
             } else if (list.get(0).getClass() == Course.class) {
@@ -120,7 +135,7 @@ public class Menu {
         }
     }
 
-    public static void showAllObjectListsWithAdditional(int choiceFromObjects, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) {
+    public static void showAllObjectListsWithAdditional(int choiceFromObjects, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
 
         switch (choiceFromObjects) {
             case 1:
@@ -146,6 +161,9 @@ public class Menu {
                 break;
             case 8:
                 showStudentsWith2Courses(studentsList);
+                break;
+            case 9:
+                showStudentsWithInweekSubmissions(studentsList);
                 break;
             default:
                 System.out.print("Choose one of the above by typing the appropriate number.");
@@ -245,6 +263,34 @@ public class Menu {
             System.out.println("If you don't want to create one, we can synthesize a new one");
             System.out.println("using random, predifined data. In that case, press enter without typing");
             System.out.println("anything in the first sentence.\n");
+        }
+    }
+
+    public static void showStudentsWithInweekSubmissions(ArrayList<Student> studentsList) throws ParseException {
+        ArrayList<Student> validStudentList = new ArrayList<>();
+        System.out.println("Type the date that you want in this format \"DD/MM/YYYY\"");
+        String dateStr = Tools.scan.next();
+        LocalDate date = Tools.stringToLocalDate(dateStr);
+//      Find week that the date is in.
+        TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+        int weekNumberGiven = date.get(woy);
+//      For each asssignment in each student, check if submission date is in same week as date.
+        for (Student student : studentsList) {
+            for (int i = 0; i < student.getAssignment().size(); i++) {
+                int dueDate = student.getAssignment().get(i).getSubDateTime().get(woy);
+                if (dueDate == weekNumberGiven) {
+                    validStudentList.add(student);
+                }
+            }
+        }
+        if (validStudentList.isEmpty()){
+            System.out.println("There are no students with their assignments' submission date");
+            System.out.println("in the week to which you are referring.\n");
+        }
+        int i = 1;
+        for (Student student : validStudentList) {
+            System.out.println(i+ ". " +student.getFirstName() + " " + student.getLastName());
+            i++;
         }
     }
 

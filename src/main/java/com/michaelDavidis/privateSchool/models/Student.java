@@ -24,18 +24,18 @@ public class Student {
     private LocalDate dateOfBirth;
     private int tuitionFees;
     private ArrayList<Course> course;
-    private Assignment assignment;
+    private ArrayList<Assignment> assignment;
     private static ArrayList<String> firstNameList = new ArrayList<>(Arrays.asList("Jim", "Jessie", "Seth", "Tina", "Celia", "Jake", "Steve"));
     private static ArrayList<String> lastNameList = new ArrayList<>(Arrays.asList("Abrams", "Salvio", "Travis", "Cicero", "Jones", "Surtis", "Ansel"));
     private static ArrayList<String> dobList = new ArrayList<>(Arrays.asList("19/08/1986", "14/12/2000", "17/01/1990", "01/05/1981", "31/01/1996", "10/10/1999"));
 
-    public Student(String firstName, String lastName, LocalDate dateOfBirth, int tuitionFees, ArrayList<Course> course, Assignment assignment) {
+    public Student(String firstName, String lastName, LocalDate dateOfBirth, int tuitionFees, ArrayList<Course> course) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.tuitionFees = tuitionFees;
         this.course = course;
-        this.assignment = assignment;
+        this.assignment = new ArrayList<Assignment>();
     }
 
     public static Student createRandomStudent() throws ParseException {
@@ -46,9 +46,10 @@ public class Student {
         int year = Tools.randomIntInRange(1975, 2003);
         LocalDate dob = Tools.stringToLocalDate(day + "/"+month+"/"+year);
         ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(Course.createRandomCourse()));
-        Assignment assignment = Assignment.createRandomAssignment();
+        ArrayList<Assignment> assignment = new ArrayList<>(Arrays.asList(Assignment.createRandomAssignment()));
         int tuitionFees = Tools.random.nextInt(10001);
-        Student student = new Student(firstName, lastName, dob, tuitionFees, courseList, assignment);
+        Student student = new Student(firstName, lastName, dob, tuitionFees, courseList);
+        student.setAssignment(assignment.get(0));
         return student;
     }
 
@@ -76,12 +77,12 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Assignment getAssignment() {
+    public ArrayList<Assignment> getAssignment() {
         return assignment;
     }
 
     public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
+        this.assignment.add(assignment);
     }
 
     public int getTuitionFees() {

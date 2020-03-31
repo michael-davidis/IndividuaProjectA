@@ -11,8 +11,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 import main.java.com.michaelDavidis.privateSchool.models.Assignment;
 import main.java.com.michaelDavidis.privateSchool.models.Course;
@@ -34,6 +37,7 @@ public class main {
             String courseName = Tools.scan.nextLine();
             if (courseName.equalsIgnoreCase(" ") || courseName.equalsIgnoreCase("")) {
                 coursesList.add(Course.createRandomCourse());
+                System.out.println("A random course has been created.\n");
                 System.out.println("Do you want to continue and add another course? (Y/N)");
                 cont = Tools.scan.next();
             } else {
@@ -61,6 +65,7 @@ public class main {
 //      Method for creating a new trainer
         String cont = "y";
         Menu.showEmptyTrainerList(trainersList);
+
 //      While loop for if we want to add another trainer
         while (cont.equalsIgnoreCase("y")) {
             System.out.print("Give me the first name of the trainer: ");
@@ -68,16 +73,14 @@ public class main {
             String fname = Tools.scan.nextLine();
             if (fname.equalsIgnoreCase(" ") || fname.equalsIgnoreCase("")) {
                 trainersList.add(Trainer.createRandomTrainer());
-                break;
+                System.out.println("A random trainer has been created.\n");
+                System.out.println("Do you want to continue and add another trainer? (Y/N)");
+                cont = Tools.scan.next();
             } else {
                 System.out.print("Give me the last name of the trainer: ");
                 String lname = Tools.scan.next();
                 System.out.println("Choose the course he/she is teaching: ");
                 if (coursesList.isEmpty()) {
-                    System.out.println("\nThere are no classes registered. You need to create one.");
-                    System.out.println("If you don't want to create one, we can synthesize a new one");
-                    System.out.println("using random, predifined data. In that case, press enter without typing");
-                    System.out.println("anything in the first sentence.\n");
                     createCourse(coursesList);
                 }
                 Menu.showListObjects(coursesList);
@@ -104,16 +107,14 @@ public class main {
             String title = Tools.scan.nextLine();
             if (title.equalsIgnoreCase(" ") || title.equalsIgnoreCase("")) {
                 assignmentsList.add(Assignment.createRandomAssignment());
-                break;
+                System.out.println("A random assignment has been created.\n");
+                System.out.println("Do you want to continue and add another assignment? (Y/N)");
+                cont = Tools.scan.next();
             } else {
                 System.out.print("Give me the description of the assignment: ");
                 String description = Tools.scan.nextLine();
                 System.out.print("Choose the course that it is in: ");
                 if (coursesList.isEmpty()) {
-                    System.out.println("\nThere are no classes registered. You need to create one.");
-                    System.out.println("If you don't want to create one, we can synthesize a new one");
-                    System.out.println("using random, predifined data. In that case, press enter without typing");
-                    System.out.println("anything in the first sentence.\n");
                     createCourse(coursesList);
                 }
                 Menu.showListObjects(coursesList);
@@ -149,7 +150,9 @@ public class main {
             String fname = Tools.scan.nextLine();
             if (fname.equalsIgnoreCase(" ") || fname.equalsIgnoreCase("")) {
                 studentsList.add(Student.createRandomStudent());
-                break;
+                System.out.println("A random student has been created.\n");
+                System.out.println("Do you want to continue and add another student? (Y/N)");
+                cont = Tools.scan.next();
             } else {
                 System.out.print("Give me the last name of the student: ");
                 String lname = Tools.scan.next();
@@ -182,25 +185,19 @@ public class main {
                     createAssignment(assignmentsList, coursesList);
                 }
                 Menu.showListObjects(assignmentsList);
-                int assignmentNum = Tools.scan.nextInt();
-                Student student = new Student(fname, lname, Tools.stringToLocalDate(dob), fee, courses, Menu.chooseAssignment(assignmentsList, assignmentNum));
+//              TODO: INDEX Out Of Bound FIX, Ask to add more assignments or choose from list
+                int assignmentNum = Tools.scan.nextInt() - 1;
+                Student student = new Student(fname, lname, Tools.stringToLocalDate(dob), fee, courses);
+                while (assignmentsList.size() < assignmentNum) {
+                    System.out.println("Please enter a number between 1 and " + assignmentsList.size());
+                }
+                student.setAssignment(assignmentsList.get(assignmentNum));
                 studentsList.add(student);
                 System.out.println("Do you want to continue and add another student? (Y/N)");
                 cont = Tools.scan.next();
             }
         }
         return studentsList;
-    }
-
-    public static void showStudentsWithInweekSubmissions(ArrayList<Student> studentsList) {
-//        LocalDate dateToday = LocalDate.now();
-//        
-//        for (Student student: studentsList){
-//            if(student.getAssignment().getSubDateTime() == dateToday){
-////            
-//            }
-//
-//        }
     }
 
     public static void createAllObjects(int choice, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
@@ -236,10 +233,10 @@ public class main {
 
 //      Starting our menu
         Menu.intro();
-        String quit = "n";
-        while (quit.equalsIgnoreCase("n")) {
+        String outerChoice = "n";
+        while (!outerChoice.equalsIgnoreCase("exit")) {
             Menu.createOrSee();
-            String outerChoice = Tools.scan.next();
+            outerChoice = Tools.scan.next();
             if (Tools.intValidation(outerChoice)) {
                 if (outerChoice.equals("1")) {
                     Menu.chooseToCreateFromList();
@@ -254,12 +251,12 @@ public class main {
                     System.out.println("This is not a valid choice.");
                     System.out.println("Choose the appropriate number.\n");
                 }
-            } else {
+            } else if(!outerChoice.equalsIgnoreCase("exit")){
                 System.out.println("\n");
                 System.out.println("This is not a valid choice.");
                 System.out.println("Choose the appropriate number.\n");
             }
         }
-        System.out.println("Thank you for using our school's app.");
+        Menu.exiting();
     }
 }

@@ -67,4 +67,20 @@ public class Tools {
         }
     }
 
+    public static boolean strFirstTimeValidation(String input) {
+        int x = 0;
+        for (int i = 0; i < input.length(); i++) {
+            String inputIndex = input.substring(i);
+            if (numList.contains(inputIndex)) {
+                x++;
+                break;
+            }
+        }
+        if (x > 0) {
+            return false;
+        } else if (x<0 &&(input.equalsIgnoreCase(" ") || input.equalsIgnoreCase(""))) {
+            return true;
+        }else{return false;}
+    }
+
 }
