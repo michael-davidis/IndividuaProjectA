@@ -5,25 +5,37 @@
  */
 package main.java.com.michaelDavidis.privateSchool.models;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Random;
 
 /**
  *
  * @author Mike
  */
 public class Trainer {
-
     private String firstName;
     private String lastName;
     private Course course;
+    private static ArrayList<String> firstNamesList = new ArrayList<String>(Arrays.asList("John", "James", "Jack", "Michael", "Nick", "Christina", "Diana", "Clarice"));
+    private static ArrayList<String> lastNamesList = new ArrayList<String>(Arrays.asList("Jones", "Keegan", "Clay", "Peralta", "Skiba", "Griffin"));
+    
 
     public Trainer(String firstName, String lastName, Course course) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.course = course;
     }
-
+    
+    public static Trainer createRandomTrainer() throws ParseException{
+        String fname = firstNamesList.get(Tools.randomIntInListSize(firstNamesList));
+        
+        String lname = lastNamesList.get(Tools.randomIntInListSize(lastNamesList));
+        Trainer trainer = new Trainer(fname, lname, Course.createRandomCourse());
+        return trainer;
+    }
+    
     public Course getCourse() {
         return course;
     }

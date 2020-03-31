@@ -5,7 +5,10 @@
  */
 package main.java.com.michaelDavidis.privateSchool.models;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -16,22 +19,37 @@ import java.util.Scanner;
  */
 public class Student {
 
-    static Scanner sc = new Scanner(System.in);
-    public static ArrayList<Student> studentsList = new ArrayList<Student>();
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private int tuitionFees;
-    private Course course;
+    private ArrayList<Course> course;
     private Assignment assignment;
+    private static ArrayList<String> firstNameList = new ArrayList<>(Arrays.asList("Jim", "Jessie", "Seth", "Tina", "Celia", "Jake", "Steve"));
+    private static ArrayList<String> lastNameList = new ArrayList<>(Arrays.asList("Abrams", "Salvio", "Travis", "Cicero", "Jones", "Surtis", "Ansel"));
+    private static ArrayList<String> dobList = new ArrayList<>(Arrays.asList("19/08/1986", "14/12/2000", "17/01/1990", "01/05/1981", "31/01/1996", "10/10/1999"));
 
-    public Student(String firstName, String lastName, String dateOfBirth, int tuitionFees, Course course, Assignment assignment) {
+    public Student(String firstName, String lastName, LocalDate dateOfBirth, int tuitionFees, ArrayList<Course> course, Assignment assignment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.tuitionFees = tuitionFees;
         this.course = course;
         this.assignment = assignment;
+    }
+
+    public static Student createRandomStudent() throws ParseException {
+        String firstName = firstNameList.get(Tools.randomIntInListSize(firstNameList));
+        String lastName = lastNameList.get(Tools.randomIntInListSize(lastNameList));
+        int day = Tools.random.nextInt(32);
+        int month = Tools.randomIntInRange(1, 13);
+        int year = Tools.randomIntInRange(1975, 2003);
+        LocalDate dob = Tools.stringToLocalDate(day + "/"+month+"/"+year);
+        ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(Course.createRandomCourse()));
+        Assignment assignment = Assignment.createRandomAssignment();
+        int tuitionFees = Tools.random.nextInt(10001);
+        Student student = new Student(firstName, lastName, dob, tuitionFees, courseList, assignment);
+        return student;
     }
 
     public String getFirstName() {
@@ -50,20 +68,12 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 
     public Assignment getAssignment() {
@@ -80,6 +90,14 @@ public class Student {
 
     public void setTuitionFees(int tuitionFees) {
         this.tuitionFees = tuitionFees;
+    }
+
+    public ArrayList<Course> getCourse() {
+        return course;
+    }
+
+    public void setCourse(ArrayList<Course> course) {
+        this.course = course;
     }
 
 }
