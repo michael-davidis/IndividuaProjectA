@@ -36,13 +36,16 @@ public class Assignment {
     }
 
     public static Assignment createRandomAssignment() throws ParseException {
+//      Getting random items from the lists
         String title = titleList.get(Tools.randomIntInListSize(titleList));
         String description = descriptionList.get(Tools.randomIntInListSize(descriptionList));
         Course course = Course.createRandomCourse();
+//      Creating a LocalDate object using the custom method we created
         LocalDate date = Tools.stringToLocalDate(subDateTimeList.get(Tools.randomIntInListSize(subDateTimeList)));
         int randOralMark = Tools.random.nextInt(101);
         int totalMark = 100;
         Assignment assignment = new Assignment(title, description, course, date, randOralMark, totalMark);
+//      We add the randomly created objects in the main lists.
         main.java.com.michaelDavidis.privateSchool.main.coursesList.add(course);
         return assignment;
     }

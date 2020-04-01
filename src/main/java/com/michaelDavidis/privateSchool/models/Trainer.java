@@ -28,10 +28,12 @@ public class Trainer {
     }
     
     public static Trainer createRandomTrainer() throws ParseException{
+//      Getting random names from lists
         String fname = firstNamesList.get(Tools.randomIntInListSize(firstNamesList));
-        
         String lname = lastNamesList.get(Tools.randomIntInListSize(lastNamesList));
-        Trainer trainer = new Trainer(fname, lname, Course.createRandomCourse());
+//      Creating a random course
+        Course course = Course.createRandomCourse();
+        Trainer trainer = new Trainer(fname, lname, course);
         return trainer;
     }
     

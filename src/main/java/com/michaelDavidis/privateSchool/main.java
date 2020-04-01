@@ -25,14 +25,16 @@ public class main {
         while (cont.equalsIgnoreCase("y")) {
             Menu.showEmptyCourseList(coursesList);
             System.out.print("Give me the title of the course: ");
-            String deathOfAScanner = Tools.scan.nextLine();
+            String deathOfAScanner = Tools.scan.nextLine(); // This variable is used only to compensate for a known problem of the nextLine() method
             String courseName = Tools.scan.nextLine();
+//          Checking is the input is empty and or space and create a random object
             if (courseName.equalsIgnoreCase(" ") || courseName.equalsIgnoreCase("")) {
                 coursesList.add(Course.createRandomCourse());
                 System.out.println("A random course has been created.\n");
                 System.out.println("Do you want to continue and add another course? (Y/N)");
                 cont = Tools.scan.next();
             } else {
+//          If it is not empty, we continue with creating a new object
                 System.out.print("Give me the stream of the course: ");
                 String courseStream = Tools.scan.nextLine();
                 System.out.print("Give me the type of the course: ");
@@ -61,14 +63,16 @@ public class main {
 //      While loop for if we want to add another trainer
         while (cont.equalsIgnoreCase("y")) {
             System.out.print("Give me the first name of the trainer: ");
-            String deathOfAScanner = Tools.scan.nextLine();
+            String deathOfAScanner = Tools.scan.nextLine();// This variable is used only to compensate for a known problem of the nextLine() method
             String fname = Tools.scan.nextLine();
+//          Checking is the input is empty and or space and create a random object
             if (fname.equalsIgnoreCase(" ") || fname.equalsIgnoreCase("")) {
                 trainersList.add(Trainer.createRandomTrainer());
                 System.out.println("A random trainer has been created.\n");
                 System.out.println("Do you want to continue and add another trainer? (Y/N)");
                 cont = Tools.scan.next();
             } else {
+//          If it is not empty, we continue with creating a new object
                 System.out.print("Give me the last name of the trainer: ");
                 String lname = Tools.scan.next();
                 System.out.println("Choose the course he/she is teaching: ");
@@ -95,14 +99,16 @@ public class main {
         while (cont.equalsIgnoreCase("y")) {
             Scanner sc = new Scanner(System.in);
             System.out.print("Give me the title of the assignment: ");
-            String deathOfAScanner = Tools.scan.nextLine();
+            String deathOfAScanner = Tools.scan.nextLine();// This variable is used only to compensate for a known problem of the nextLine() method
             String title = Tools.scan.nextLine();
+//          Checking is the input is empty and or space and create a random object            
             if (title.equalsIgnoreCase(" ") || title.equalsIgnoreCase("")) {
                 assignmentsList.add(Assignment.createRandomAssignment());
                 System.out.println("A random assignment has been created.\n");
                 System.out.println("Do you want to continue and add another assignment? (Y/N)");
                 cont = Tools.scan.next();
             } else {
+//          If it is not empty, we continue with creating a new object                
                 System.out.print("Give me the description of the assignment: ");
                 String description = Tools.scan.nextLine();
                 System.out.print("Choose the course that it is in: ");
@@ -137,18 +143,19 @@ public class main {
 //      While loop for if we want to add another course
         while (cont.equalsIgnoreCase("y")) {
             System.out.print("Give me the first name of the student: ");
-            String deathOfAScanner = Tools.scan.nextLine();
+            String deathOfAScanner = Tools.scan.nextLine(); // This variable is used only to compensate for a known problem of the nextLine() method
             String fname = Tools.scan.nextLine();
+//          Checking is the input is empty and or space and create a random object   
             if (fname.equalsIgnoreCase(" ") || fname.equalsIgnoreCase("")) {
                 studentsList.add(Student.createRandomStudent());
                 System.out.println("A random student has been created.\n");
                 System.out.println("Do you want to continue and add another student? (Y/N)");
                 cont = Tools.scan.next();
             } else {
+//          If it is not empty, we continue with creating a new object
                 System.out.print("Give me the last name of the student: ");
                 String lname = Tools.scan.next();
                 System.out.print("Give me the date of his/her birth in this format DD/MM/YYYY: ");
-//          In order to enter a date using the Date class, we have to get it as a string and the convert is via SimpleDateFormat into a Date object 
                 String dob = Tools.scan.next();
                 System.out.print("Give me his/her tuition fees: ");
                 int fee = Tools.scan.nextInt();
@@ -156,12 +163,6 @@ public class main {
 //          Right here, we show all the courses so the user can choose
                 System.out.println("Choose from one of these");
                 if (coursesList.isEmpty()) {
-                    System.out.println("\nThere are no classes registered. You need to create one.");
-                    System.out.println("If you don't want to create one, we can synthesize a new one");
-                    System.out.println("using random, predifined data. In that case, press enter without typing");
-                    System.out.println("anything in the first sentence.\n");
-                    createCourse(coursesList);
-                } else {
                     createCourse(coursesList);
                 }
                 Menu.showListObjects(coursesList);
@@ -171,15 +172,11 @@ public class main {
                 System.out.println("Is this student attending another course? (Y/N)");
                 choice = Tools.scan.next();
                 System.out.println("Give me his assignment: ");
+//              Here, we show all the courses so the user can choose
                 if (assignmentsList.isEmpty()) {
-                    System.out.println("\nThere are no asssignments registered. You need to create one.");
-                    System.out.println("If you don't want to create one, we can synthesize a new one");
-                    System.out.println("using random, predifined data. In that case, press enter without typing");
-                    System.out.println("anything in the first sentence.\n");
                     createAssignment(assignmentsList, coursesList);
                 }
                 Menu.showListObjects(assignmentsList);
-//              TODO: INDEX Out Of Bound FIX, Ask to add more assignments or choose from list
                 int assignmentNum = Tools.scan.nextInt() - 1;
                 Student student = new Student(fname, lname, Tools.stringToLocalDate(dob), fee, courses);
                 while (assignmentsList.size() < assignmentNum) {
@@ -195,7 +192,7 @@ public class main {
     }
 
     public static void createAllObjects(String choice, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
-
+//      Creating Objects based on user input
         switch (choice) {
             case "1":
                 System.out.println("-----------------------------");
@@ -220,34 +217,44 @@ public class main {
     }
 
     public static void mainCode(ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
+//      Starting condition of "while"
         String outerChoice = "n";
+//      We use "IgnoreCase" to prevent any case discrepancy between the user input and what our code understands
         while (!outerChoice.equalsIgnoreCase("exit")) {
+//          Showing the two choices of the menu and getting the input
             Menu.createOrSee();
             outerChoice = Tools.scan.next();
+//          Starting condition of "while"
             String middleChoice = "n";
+//          This "if" and this "while" used to prevent any invalid inputs
             if (Tools.intValidation(outerChoice)) {
-                while (!Tools.intValidation(middleChoice))
-                if (outerChoice.equals("1")) {
-                    Menu.chooseToCreateFromList();
-                    middleChoice = Tools.scan.next();
-                    createAllObjects(middleChoice, coursesList, trainersList, assignmentsList, studentsList);
-                } else if (outerChoice.equals("2")) {
-                    Menu.showChoicesWithAdditional();
-                    middleChoice = Tools.scan.next();
-                    Menu.showAllObjectListsWithAdditional(middleChoice, coursesList, trainersList, assignmentsList, studentsList);
-                } else {
-                    System.out.println("\n");
-                    System.out.println("This is not a valid choice.");
-                    System.out.println("Choose the appropriate number.\n");
+                while (!Tools.intValidation(middleChoice)) {
+                    if (outerChoice.equals("1")) {
+//                      Value "1" is assigned for object creation
+                        Menu.chooseToCreateFromList();
+                        middleChoice = Tools.scan.next();
+                        createAllObjects(middleChoice, coursesList, trainersList, assignmentsList, studentsList);
+                    } else if (outerChoice.equals("2")) {
+//                      Value "1" is assigned for object output
+                        Menu.showChoicesWithAdditional();
+                        middleChoice = Tools.scan.next();
+                        Menu.showAllObjectListsWithAdditional(middleChoice, coursesList, trainersList, assignmentsList, studentsList);
+                    } else {
+//                      Case of invalid input
+                        System.out.println("\n");
+                        System.out.println("This is not a valid choice.");
+                        System.out.println("Choose the appropriate number.\n");
+                    }
                 }
             } else if (!outerChoice.equalsIgnoreCase("exit")) {
+//              Case of invalid input
                 System.out.println("\n");
                 System.out.println("This is not a valid choice.");
                 System.out.println("Choose the appropriate number.\n");
             }
         }
     }
-
+// These are the main lists used in our code. We add objects to them or we print them
     public static ArrayList<Trainer> trainersList = new ArrayList<>();
     public static ArrayList<Course> coursesList = new ArrayList<>();
     public static ArrayList<Assignment> assignmentsList = new ArrayList<>();
@@ -257,6 +264,7 @@ public class main {
 //      Starting our menu
         Menu.intro();
         mainCode(coursesList, trainersList, assignmentsList, studentsList);
-        Menu.exiting();
+//      When input is "exit" in mainCode, then Menu.exiting() shows the outro of our code
+        Menu.outro();
     }
 }

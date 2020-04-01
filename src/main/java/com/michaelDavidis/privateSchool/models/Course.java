@@ -41,9 +41,11 @@ public class Course {
     }
 
     public static Course createRandomCourse() throws ParseException {
+//      Getting random items from the lists
         String title = randTitlesList.get(Tools.randomIntInListSize(randTitlesList));
         String stream = randStream.get(Tools.randomIntInListSize(randStream));
         String type = randType.get(Tools.randomIntInListSize(randType));
+//      Creating a LocalDate object using the custom method we created
         LocalDate courseStartDate = Tools.stringToLocalDate(randStartDate.get(Tools.randomIntInListSize(randStartDate)));   
         LocalDate courseEndDate = Tools.stringToLocalDate(randEndDate.get(Tools.randomIntInListSize(randEndDate)));
         Course course = new Course(title, stream, type, courseStartDate, courseEndDate);

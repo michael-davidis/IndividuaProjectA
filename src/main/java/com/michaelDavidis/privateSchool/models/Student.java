@@ -36,17 +36,21 @@ public class Student {
     }
 
     public static Student createRandomStudent() throws ParseException {
+//      Getting a random name from list  
         String firstName = firstNameList.get(Tools.randomIntInListSize(firstNameList));
         String lastName = lastNameList.get(Tools.randomIntInListSize(lastNameList));
+//      Using random numbers, we create a date
         int day = Tools.random.nextInt(32);
         int month = Tools.randomIntInRange(1, 13);
         int year = Tools.randomIntInRange(1975, 2003);
+//      Creating a LocalDate object using the custom method we created
         LocalDate dob = Tools.stringToLocalDate(day + "/"+month+"/"+year);
         ArrayList<Course> courseList = new ArrayList<>(Arrays.asList(Course.createRandomCourse()));
         ArrayList<Assignment> assignment = new ArrayList<>(Arrays.asList(Assignment.createRandomAssignment()));
         int tuitionFees = Tools.random.nextInt(10001);
         Student student = new Student(firstName, lastName, dob, tuitionFees, courseList);
         student.setAssignment(assignment.get(0));
+//      We add the randomly created objects in the main lists.
         main.java.com.michaelDavidis.privateSchool.main.coursesList.add(courseList.get(0));
         main.java.com.michaelDavidis.privateSchool.main.assignmentsList.add(assignment.get(0));   
         return student;

@@ -27,7 +27,7 @@ public class Menu {
         System.out.println("*******************************************\n");
     }
 
-    public static void exiting() {
+    public static void outro() {
         System.out.println("\n*******************************************");
         System.out.println("*             Thank you for               *");
         System.out.println("*             using our app!              *");
@@ -55,6 +55,7 @@ public class Menu {
     }
 
     public static void showChoices() {
+//      This is the menu for object creation
         System.out.println("\nPress 1 for a course.");
         System.out.println("Press 2 for a trainer.");
         System.out.println("Press 3 for an assignment.");
@@ -62,6 +63,7 @@ public class Menu {
     }
 
     public static void showChoicesWithAdditional() {
+//      This is the menu for printing objects
         System.out.println("\nPress 1 for a course.");
         System.out.println("Press 2 for a trainer.");
         System.out.println("Press 3 for an assignment.");
@@ -75,6 +77,7 @@ public class Menu {
     }
 
     public static void showListObjects(ArrayList list) {
+//      Printing objects of lists. They are determined by the class of the objects contained in the lists.
         int i = 1;
         if (!list.isEmpty()) {
             if (list.get(0).getClass() == Trainer.class) {
@@ -116,6 +119,7 @@ public class Menu {
     }
 
     public static void showAllObjectLists(int choiceFromObjects, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) {
+//      Choosing the lists.
         switch (choiceFromObjects) {
             case 1:
                 showListObjects(coursesList);
@@ -137,7 +141,7 @@ public class Menu {
     }
 
     public static void showAllObjectListsWithAdditional(String choiceFromObjects, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
-
+//      These are the same lists, but with the addition of the extra choices
         switch (choiceFromObjects) {
             case "1":
                 showListObjects(coursesList);
@@ -175,9 +179,11 @@ public class Menu {
 
     public static void showStudentsPerCourse(ArrayList<Student> studentsList, ArrayList<Course> coursesList) {
         System.out.println("The students per course are the following: ");
+//      Checking if the list is empty
         if (studentsList.isEmpty()) {
             System.out.println("There are no students registered.\n");
         }
+//      If it's not, we iterate to show the students of the courses
         coursesList.stream().map((course) -> {
             System.out.println("The students of " + course.getTitle() + " are: ");
             return course;
@@ -192,9 +198,11 @@ public class Menu {
 
     public static void showTrainersPerCourse(ArrayList<Trainer> trainersList, ArrayList<Course> coursesList) {
         System.out.println("The trainers per course are the following: ");
+//      Checking if the list is empty
         if (trainersList.isEmpty()) {
             System.out.println("There are no trainers registered.\n");
         }
+//      If it's not, we iterate to show the trainers of the courses
         coursesList.stream().map((course) -> {
             System.out.println("The trainers for " + course.getTitle() + " are :");
             return course;
@@ -208,9 +216,11 @@ public class Menu {
     public static void showAssignmentsPerCourse(ArrayList<Assignment> assignmentsList, ArrayList<Course> coursesList) {
         int i = 0;
         System.out.println("The assignments in each course are the following:");
+//      Checking if the list is empty
         if (assignmentsList.isEmpty()) {
             System.out.println("There are no assignments registered.\n");
         }
+//      If it's not, we iterate to show the assignments of the courses        
         coursesList.stream().map((course) -> {
             System.out.println("The assignmets of " + course.getTitle() + " are :");
             return course;
@@ -223,15 +233,19 @@ public class Menu {
 
     public static void showStudentsWith2Courses(ArrayList<Student> studentsList) {
         System.out.println("The students with 2 or more courses are the following: ");
+//      Checking if the list is empty        
         if (studentsList.isEmpty()) {
             System.out.println("There are no students registered.\n");
         }
+//      If it's not, we iterate to show the students with 2+ courses     
         studentsList.stream().filter((student) -> (student.getCourse().size() > 1)).forEachOrdered((student) -> {
             System.out.println(student.getLastName() + " " + student.getFirstName());
         });
     }
 
+
     public static void showEmptyCourseList(ArrayList<Course> coursesList) {
+//      This shows when the list is empty.
         if (coursesList.isEmpty()) {
             System.out.println("\nThere are no classes registered. You need to create one.");
             System.out.println("If you don't want to create one, we can synthesize a new one");
@@ -241,6 +255,7 @@ public class Menu {
     }
 
     public static void showEmptyTrainerList(ArrayList<Trainer> trainersList) {
+//      This shows when the list is empty.
         if (trainersList.isEmpty()) {
             System.out.println("\nThere are no trainer registered. You need to create one.");
             System.out.println("If you don't want to create one, we can synthesize a new one");
@@ -250,6 +265,7 @@ public class Menu {
     }
 
     public static void showEmptyAssignmentList(ArrayList<Assignment> assignmentsList) {
+//      This shows when the list is empty.
         if (assignmentsList.isEmpty()) {
             System.out.println("\nThere are no assignment registered. You need to create one.");
             System.out.println("If you don't want to create one, we can synthesize a new one");
@@ -259,6 +275,7 @@ public class Menu {
     }
 
     public static void showEmptyStudentList(ArrayList<Student> studentsList) {
+//      This shows when the list is empty.
         if (studentsList.isEmpty()) {
             System.out.println("\nThere are no student registered. You need to create one.");
             System.out.println("If you don't want to create one, we can synthesize a new one");
@@ -284,10 +301,12 @@ public class Menu {
                 }
             }
         }
+//      This shows when the list is empty.        
         if (validStudentList.isEmpty()) {
             System.out.println("There are no students with their assignments' submission date");
             System.out.println("in the week to which you are referring.\n");
         }
+//      If it's not, we iterate and show the students
         int i = 1;
         for (Student student : validStudentList) {
             System.out.println(i + ". " + student.getFirstName() + " " + student.getLastName());
