@@ -55,14 +55,14 @@ public class Menu {
     }
 
     public static void showChoices() {
-        System.out.println("Press 1 for a course.");
+        System.out.println("\nPress 1 for a course.");
         System.out.println("Press 2 for a trainer.");
         System.out.println("Press 3 for an assignment.");
         System.out.println("Press 4 for a student.");
     }
 
     public static void showChoicesWithAdditional() {
-        System.out.println("Press 1 for a course.");
+        System.out.println("\nPress 1 for a course.");
         System.out.println("Press 2 for a trainer.");
         System.out.println("Press 3 for an assignment.");
         System.out.println("Press 4 for a student.");
@@ -86,13 +86,14 @@ public class Menu {
             } else if (list.get(0).getClass() == Course.class) {
                 for (Object tmp : list) {
                     Course course = (Course) tmp;
-                    System.out.println(i + ". \"" + course.getTitle() + "\" ");
+                    System.out.println(i + ". \"" + course.getTitle() + "\", " + course.getType() + ". Starting on " + course.getStartDate() + " and ending on " + course.getEndDate() + ".");
                     i++;
                 }
             } else if (list.get(0).getClass() == Assignment.class) {
                 for (Object tmp : list) {
                     Assignment assignment = (Assignment) tmp;
-                    System.out.println(i + ". " + assignment.getTitle());
+                    System.out.println(i + ". \n" + assignment.getTitle() + "\n in " + assignment.getCourse().getTitle() + ", With date of submission " + assignment.getSubDateTime()
+                            + ". The mark is " + assignment.getOralMark() + "/" + assignment.getTotalMark());
                     i++;
                 }
             } else if (list.get(0).getClass() == Student.class) {
@@ -283,13 +284,13 @@ public class Menu {
                 }
             }
         }
-        if (validStudentList.isEmpty()){
+        if (validStudentList.isEmpty()) {
             System.out.println("There are no students with their assignments' submission date");
             System.out.println("in the week to which you are referring.\n");
         }
         int i = 1;
         for (Student student : validStudentList) {
-            System.out.println(i+ ". " +student.getFirstName() + " " + student.getLastName());
+            System.out.println(i + ". " + student.getFirstName() + " " + student.getLastName());
             i++;
         }
     }

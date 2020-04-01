@@ -6,16 +6,8 @@
 package main.java.com.michaelDavidis.privateSchool;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalField;
-import java.time.temporal.WeekFields;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 import main.java.com.michaelDavidis.privateSchool.models.Assignment;
 import main.java.com.michaelDavidis.privateSchool.models.Course;
@@ -155,7 +147,7 @@ public class main {
             } else {
                 System.out.print("Give me the last name of the student: ");
                 String lname = Tools.scan.next();
-                System.out.print("Give me the date of his/her birth in this format \"DD/MM/YYYY\": ");
+                System.out.print("Give me the date of his/her birth in this format DD/MM/YYYY: ");
 //          In order to enter a date using the Date class, we have to get it as a string and the convert is via SimpleDateFormat into a Date object 
                 String dob = Tools.scan.next();
                 System.out.print("Give me his/her tuition fees: ");
@@ -226,15 +218,7 @@ public class main {
         }
     }
 
-    public static void main(String[] args) throws ParseException {
-//      Declare the lists
-        ArrayList<Trainer> trainersList = new ArrayList<>();
-        ArrayList<Course> coursesList = new ArrayList<>();
-        ArrayList<Assignment> assignmentsList = new ArrayList<>();
-        ArrayList<Student> studentsList = new ArrayList<>();
-
-//      Starting our menu
-        Menu.intro();
+    public static void mainCode(ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
         String outerChoice = "n";
         while (!outerChoice.equalsIgnoreCase("exit")) {
             Menu.createOrSee();
@@ -259,6 +243,17 @@ public class main {
                 System.out.println("Choose the appropriate number.\n");
             }
         }
+    }
+
+    public static ArrayList<Trainer> trainersList = new ArrayList<>();
+    public static ArrayList<Course> coursesList = new ArrayList<>();
+    public static ArrayList<Assignment> assignmentsList = new ArrayList<>();
+    public static ArrayList<Student> studentsList = new ArrayList<>();
+
+    public static void main(String[] args) throws ParseException {
+//      Starting our menu
+        Menu.intro();
+        mainCode(coursesList, trainersList, assignmentsList, studentsList);
         Menu.exiting();
     }
 }

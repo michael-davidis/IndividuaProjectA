@@ -6,14 +6,10 @@
 package main.java.com.michaelDavidis.privateSchool.models;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-
-import java.time.ZoneId;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+
 
 
 
@@ -48,8 +44,7 @@ public class Course {
         String title = randTitlesList.get(Tools.randomIntInListSize(randTitlesList));
         String stream = randStream.get(Tools.randomIntInListSize(randStream));
         String type = randType.get(Tools.randomIntInListSize(randType));
-        LocalDate courseStartDate = Tools.stringToLocalDate(randStartDate.get(Tools.randomIntInListSize(randStartDate)));
-        
+        LocalDate courseStartDate = Tools.stringToLocalDate(randStartDate.get(Tools.randomIntInListSize(randStartDate)));   
         LocalDate courseEndDate = Tools.stringToLocalDate(randEndDate.get(Tools.randomIntInListSize(randEndDate)));
         Course course = new Course(title, stream, type, courseStartDate, courseEndDate);
         return course;

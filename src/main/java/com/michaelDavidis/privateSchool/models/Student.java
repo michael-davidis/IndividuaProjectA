@@ -9,9 +9,6 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -50,6 +47,8 @@ public class Student {
         int tuitionFees = Tools.random.nextInt(10001);
         Student student = new Student(firstName, lastName, dob, tuitionFees, courseList);
         student.setAssignment(assignment.get(0));
+        main.java.com.michaelDavidis.privateSchool.main.coursesList.add(courseList.get(0));
+        main.java.com.michaelDavidis.privateSchool.main.assignmentsList.add(assignment.get(0));   
         return student;
     }
 

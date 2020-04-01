@@ -9,27 +9,22 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
-
 
 /**
  *
  * @author Mike
  */
 public class Assignment {
-    
-    
+
     private String title;
     private String description;
     private Course course;
     private LocalDate subDateTime;
     private int oralMark;
     private int totalMark;
-    private static ArrayList<String> titleList = new ArrayList<String>(Arrays.asList("Random stuff 1","Random Stuff 2","Random Stuff 3", "Random Stuff 4"));
-    private static ArrayList<String> descriptionList = new ArrayList<String>(Arrays.asList("Random stuff 1","Random Stuff 2","Random Stuff 3", "Random Stuff 4"));
-    private static ArrayList<String> subDateTimeList = new ArrayList<String>(Arrays.asList("25/06/2020","28/06/2020", "30/7/2020", "19/08/2020"));
-    
+    private static ArrayList<String> titleList = new ArrayList<String>(Arrays.asList("Random stuff 1", "Random Stuff 2", "Random Stuff 3", "Random Stuff 4"));
+    private static ArrayList<String> descriptionList = new ArrayList<String>(Arrays.asList("Random stuff 1", "Random Stuff 2", "Random Stuff 3", "Random Stuff 4"));
+    private static ArrayList<String> subDateTimeList = new ArrayList<String>(Arrays.asList("25/06/2020", "28/06/2020", "30/7/2020", "19/08/2020"));
 
     public Assignment(String title, String description, Course course, LocalDate subDateTime, int oralMark, int totalMark) {
         this.title = title;
@@ -39,18 +34,19 @@ public class Assignment {
         this.oralMark = oralMark;
         this.totalMark = totalMark;
     }
-    
-    public static Assignment createRandomAssignment() throws ParseException{
-       String title = titleList.get(Tools.randomIntInListSize(titleList));
-       String description =descriptionList.get(Tools.randomIntInListSize(descriptionList));
-       Course course = Course.createRandomCourse();
-       LocalDate date = Tools.stringToLocalDate(subDateTimeList.get(Tools.randomIntInListSize(subDateTimeList)));
-       int randOralMark = Tools.random.nextInt(101);
-       int totalMark = 100;
-       Assignment assignment = new Assignment(title, description, course, date, randOralMark, totalMark);
-       return assignment;
+
+    public static Assignment createRandomAssignment() throws ParseException {
+        String title = titleList.get(Tools.randomIntInListSize(titleList));
+        String description = descriptionList.get(Tools.randomIntInListSize(descriptionList));
+        Course course = Course.createRandomCourse();
+        LocalDate date = Tools.stringToLocalDate(subDateTimeList.get(Tools.randomIntInListSize(subDateTimeList)));
+        int randOralMark = Tools.random.nextInt(101);
+        int totalMark = 100;
+        Assignment assignment = new Assignment(title, description, course, date, randOralMark, totalMark);
+        main.java.com.michaelDavidis.privateSchool.main.coursesList.add(course);
+        return assignment;
     }
-    
+
     public Course getCourse() {
         return course;
     }

@@ -8,7 +8,6 @@ package main.java.com.michaelDavidis.privateSchool.models;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  *
