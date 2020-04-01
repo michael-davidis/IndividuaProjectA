@@ -254,6 +254,7 @@ public class main {
             }
         }
     }
+
 // These are the main lists used in our code. We add objects to them or we print them
     public static ArrayList<Trainer> trainersList = new ArrayList<>();
     public static ArrayList<Course> coursesList = new ArrayList<>();
