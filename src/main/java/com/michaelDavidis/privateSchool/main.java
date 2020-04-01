@@ -34,9 +34,9 @@ public class main {
                 cont = Tools.scan.next();
             } else {
                 System.out.print("Give me the stream of the course: ");
-                String courseStream = Tools.scan.next();
+                String courseStream = Tools.scan.nextLine();
                 System.out.print("Give me the type of the course: ");
-                String courseType = Tools.scan.next();
+                String courseType = Tools.scan.nextLine();
                 System.out.print("Give me the start date of the course in the format DD/MM/YYYY: ");
                 String courseStartDateStr = Tools.scan.next();
                 LocalDate courseStartDate = Tools.stringToLocalDate(courseStartDateStr);
@@ -194,26 +194,27 @@ public class main {
         return studentsList;
     }
 
-    public static void createAllObjects(int choice, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
+    public static void createAllObjects(String choice, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
 
         switch (choice) {
-            case 1:
+            case "1":
                 System.out.println("-----------------------------");
                 createCourse(coursesList);
                 break;
-            case 2:
+            case "2":
                 System.out.println("-----------------------------");
                 createTrainer(trainersList, coursesList);
                 break;
-            case 3:
+            case "3":
                 System.out.println("-----------------------------");
                 createAssignment(assignmentsList, coursesList);
                 break;
-            case 4:
+            case "4":
                 System.out.println("-----------------------------");
                 createStudent(studentsList, coursesList, assignmentsList);
                 break;
             default:
+                System.out.println("Give me a valid number.");
                 break;
         }
     }
@@ -223,14 +224,16 @@ public class main {
         while (!outerChoice.equalsIgnoreCase("exit")) {
             Menu.createOrSee();
             outerChoice = Tools.scan.next();
+            String middleChoice = "n";
             if (Tools.intValidation(outerChoice)) {
+                while (!Tools.intValidation(middleChoice))
                 if (outerChoice.equals("1")) {
                     Menu.chooseToCreateFromList();
-                    int middleChoice = Tools.scan.nextInt();
+                    middleChoice = Tools.scan.next();
                     createAllObjects(middleChoice, coursesList, trainersList, assignmentsList, studentsList);
                 } else if (outerChoice.equals("2")) {
                     Menu.showChoicesWithAdditional();
-                    int middleChoice = Tools.scan.nextInt();
+                    middleChoice = Tools.scan.next();
                     Menu.showAllObjectListsWithAdditional(middleChoice, coursesList, trainersList, assignmentsList, studentsList);
                 } else {
                     System.out.println("\n");

@@ -136,34 +136,34 @@ public class Menu {
         }
     }
 
-    public static void showAllObjectListsWithAdditional(int choiceFromObjects, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
+    public static void showAllObjectListsWithAdditional(String choiceFromObjects, ArrayList<Course> coursesList, ArrayList<Trainer> trainersList, ArrayList<Assignment> assignmentsList, ArrayList<Student> studentsList) throws ParseException {
 
         switch (choiceFromObjects) {
-            case 1:
+            case "1":
                 showListObjects(coursesList);
                 break;
-            case 2:
+            case "2":
                 showListObjects(trainersList);
                 break;
-            case 3:
+            case "3":
                 showListObjects(assignmentsList);
                 break;
-            case 4:
+            case "4":
                 showListObjects(studentsList);
                 break;
-            case 5:
+            case "5":
                 showStudentsPerCourse(studentsList, coursesList);
                 break;
-            case 6:
+            case "6":
                 showAssignmentsPerCourse(assignmentsList, coursesList);
                 break;
-            case 7:
+            case "7":
                 showTrainersPerCourse(trainersList, coursesList);
                 break;
-            case 8:
+            case "8":
                 showStudentsWith2Courses(studentsList);
                 break;
-            case 9:
+            case "9":
                 showStudentsWithInweekSubmissions(studentsList);
                 break;
             default:
