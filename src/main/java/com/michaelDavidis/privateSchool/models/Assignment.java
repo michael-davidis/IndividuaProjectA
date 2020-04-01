@@ -22,8 +22,8 @@ public class Assignment {
     private LocalDate subDateTime;
     private int oralMark;
     private int totalMark;
-    private static ArrayList<String> titleList = new ArrayList<String>(Arrays.asList("Random stuff 1", "Random Stuff 2", "Random Stuff 3", "Random Stuff 4"));
-    private static ArrayList<String> descriptionList = new ArrayList<String>(Arrays.asList("Random stuff 1", "Random Stuff 2", "Random Stuff 3", "Random Stuff 4"));
+    private static ArrayList<String> titleList = new ArrayList<String>(Arrays.asList("Random Title 1", "Random Title 2", "Random Title 3", "Random Title 4"));
+    private static ArrayList<String> descriptionList = new ArrayList<String>(Arrays.asList("Random Description 1", "Random Description 2", "Random Description 3", "Random Description 4"));
     private static ArrayList<String> subDateTimeList = new ArrayList<String>(Arrays.asList("25/06/2020", "28/06/2020", "30/7/2020", "19/08/2020"));
 
     public Assignment(String title, String description, Course course, LocalDate subDateTime, int oralMark, int totalMark) {

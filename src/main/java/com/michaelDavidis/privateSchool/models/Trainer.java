@@ -34,6 +34,7 @@ public class Trainer {
 //      Creating a random course
         Course course = Course.createRandomCourse();
         Trainer trainer = new Trainer(fname, lname, course);
+        main.java.com.michaelDavidis.privateSchool.main.coursesList.add(course);
         return trainer;
     }
     
